@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HeroService } from 'src/app/hero.service';
+
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+	heroPost:any;
+	image:any;
+
+  constructor(private hero: HeroService) { }
 
   ngOnInit() {
+		this.hero.getData().subscribe( res => {
+			this.heroPost = res;
+			console.log(res);
+		})
+		this.hero.getImg().subscribe(res =>{
+			this.image = res;
+		})
   }
 
 }
