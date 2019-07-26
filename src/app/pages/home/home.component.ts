@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HeroService } from 'src/app/hero.service';
+import { BehaviorSubject } from "rxjs";
 
 
 @Component({
@@ -16,12 +17,27 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 		this.hero.getData().subscribe( res => {
-			this.heroPost = res;
 			console.log(res);
+			this.heroPost = res;
+			this.hero.getImg().subscribe(resp =>{
+			
+			
+				
+				
+					this.heroPost.map((current,index)=> {
+						current.img = resp[index].url
+						
+					});
+	
+// console.log(this.heroPost)
+
+			})
 		})
-		this.hero.getImg().subscribe(res =>{
-			this.image = res;
-		})
+		
+			
+		
+			// console.log(this.heroPost);
+	
   }
 
 }
